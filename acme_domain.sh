@@ -9,7 +9,6 @@ domainName="$1"
 #安装基础软件
 apt install socat -y
 #域名证书申请
-chmod -R 777 /root
 #下载acme脚本
 curl https://get.acme.sh | sh -s email=$(date +%s%N | md5sum | cut -c 1-16)@gmail.com
 source ~/.bashrc
@@ -23,6 +22,7 @@ bash ~/.acme.sh/acme.sh --issue -d ${domainName} --standalone -k ec-256 --insecu
 mkdir /root/ssl/
 bash ~/.acme.sh/acme.sh --install-cert -d ${domainName} --key-file /root/ssl/private.key --fullchain-file /root/ssl/cert.crt --ecc
 #定时执行脚本
+chmod -R 777 /root
 sed -i '/--cron/d' /etc/crontab >/dev/null 2>&1
 echo "0 0 * * * root bash /root/.acme.sh/acme.sh --cron -f >/dev/null 2>&1" >> /etc/crontab
 
