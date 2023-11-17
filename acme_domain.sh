@@ -1,5 +1,5 @@
-#证书申请:bash acme_domain.sh + 域名
 #!/bin/bash
+#证书申请:bash acme_domain.sh + 域名
 #获取域名
 if [ -z "$1" ];then
 	echo "请输入需要申请证书的域名：(bash acme_domain.sh 域名)"
