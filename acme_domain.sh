@@ -1,6 +1,3 @@
-
-
-
 #证书申请:bash acme_domain.sh + 域名
 #!/bin/bash
 #获取域名
