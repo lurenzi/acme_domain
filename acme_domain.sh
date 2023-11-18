@@ -7,7 +7,7 @@ if [ -z "$1" ];then
 fi
 domainName="$1"
 #安装基础软件
-apt install socat -y
+apt update -y && apt install -y curl
 #域名证书申请
 #下载acme脚本
 curl https://get.acme.sh | sh -s email=$(date +%s%N | md5sum | cut -c 1-16)@gmail.com
