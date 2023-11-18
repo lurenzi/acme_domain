@@ -28,5 +28,5 @@ echo "0 0 * * * root bash /root/.acme.sh/acme.sh --cron -f >/dev/null 2>&1" >> /
 
 echo "域名：$domainName" >> /root/infomation.log
 echo "公钥：/root/ssl/cert.crt" >> /root/infomation.log
-echo "私钥：/root/ssl/private.crt" >> /root/infomation.log
+echo "私钥：/root/ssl/private.key" >> /root/infomation.log
 echo "证书信息存储：/root/infomation.log"
