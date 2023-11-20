@@ -22,9 +22,13 @@ bash ~/.acme.sh/acme.sh --issue -d ${domainName} --standalone -k ec-256 --insecu
 mkdir /root/ssl/
 bash ~/.acme.sh/acme.sh --install-cert -d ${domainName} --key-file /root/ssl/private.key --fullchain-file /root/ssl/cert.crt --ecc
 #定时执行脚本
-chmod -R 777 /root
-sed -i '/--cron/d' /etc/crontab >/dev/null 2>&1
-echo "0 0 15 * * root bash /root/.acme.sh/acme.sh --cron -f >/dev/null 2>&1" >> /etc/crontab
+echo -n '#!/bin/bash
+/etc/init.d/nginx stop
+"/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" &> /root/renew_ssl.log
+/etc/init.d/nginx start
+' > /usr/local/bin/ssl_renew.sh
+chmod +x /usr/local/bin/ssl_renew.sh
+(crontab -l;echo "0 0 15 * * /usr/local/bin/ssl_renew.sh") | crontab
 
 echo "域名：$domainName" >> /root/infomation.log
 echo "公钥：/root/ssl/cert.crt" >> /root/infomation.log
