@@ -24,7 +24,7 @@ bash ~/.acme.sh/acme.sh --install-cert -d ${domainName} --key-file /root/ssl/pri
 #定时执行脚本
 chmod -R 777 /root
 sed -i '/--cron/d' /etc/crontab >/dev/null 2>&1
-echo "0 0 * * * root bash /root/.acme.sh/acme.sh --cron -f >/dev/null 2>&1" >> /etc/crontab
+echo "0 0 15 * * root bash /root/.acme.sh/acme.sh --cron -f >/dev/null 2>&1" >> /etc/crontab
 
 echo "域名：$domainName" >> /root/infomation.log
 echo "公钥：/root/ssl/cert.crt" >> /root/infomation.log
